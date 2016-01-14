@@ -10,7 +10,9 @@ typealias DateTuple = (year: Int, month: Int, day: Int,
 
 public struct ISO8601 {
   static let TZ_MINUS_FORMAT = "%04d-%02d-%02dT%02d:%02d:%lf-%02d:%02d"
+  static let TZ_MINUS_FORMAT_NO_COLON = "%04d-%02d-%02dT%02d:%02d:%lf-%02d%02d"
   static let TZ_PLUS_FORMAT = "%04d-%02d-%02dT%02d:%02d:%lf+%02d:%02d"
+  static let TZ_PLUS_FORMAT_NO_COLON = "%04d-%02d-%02dT%02d:%02d:%lf+%02d%02d"
   static let UTC_FORMAT = "%04d-%02d-%02dT%02d:%02d:%lfZ"
 
   static func parse(dateString: String, withFormat format: String, failAt: Int32 = 5) -> DateTuple? {
@@ -60,19 +62,25 @@ private extension NSDateComponents {
 
 extension ISO8601 {
   public static func parse(dateString: String) -> NSDateComponents {
-    for format in [TZ_MINUS_FORMAT] {
+    let components = NSDateComponents()
+
+    for format in [TZ_MINUS_FORMAT, TZ_MINUS_FORMAT_NO_COLON] {
       if let t = parse(dateString, withFormat: format, failAt: 8) {
-        let dateTuple = (t.year, t.month, t.day, t.hour, t.minute, t.second, -t.timezone_hour, -t.timezone_minute)
-        return NSDateComponents().fill(dateTuple)
+        return components.fill((t.year, t.month, t.day, t.hour, t.minute, t.second,
+            -t.timezone_hour, -t.timezone_minute))
       }
     }
 
-    for format in [TZ_PLUS_FORMAT, UTC_FORMAT] {
-      if let dateTuple = parse(dateString, withFormat: format) {
-        return NSDateComponents().fill(dateTuple)
+    for format in [TZ_PLUS_FORMAT, TZ_PLUS_FORMAT_NO_COLON] {
+      if let dateTuple = parse(dateString, withFormat: format, failAt: 8) {
+        return components.fill(dateTuple)
       }
     }
 
-    return NSDateComponents()
+    if let dateTuple = parse(dateString, withFormat: UTC_FORMAT) {
+      return components.fill(dateTuple)
+    }
+
+    return components
   }
 }
