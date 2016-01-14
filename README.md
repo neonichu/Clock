@@ -6,6 +6,22 @@ Naïve ISO8601 date parser, written in Swift.
 
 :warning: WIP
 
+## Usage
+
+You can parse ISO8601 date strings:
+
+```swift
+print(ISO8601.parse("1981-10-28T04:05:06.789Z"))
+<NSDateComponents: 0x7fbe61d0f040>
+    TimeZone: GMT (GMT) offset 0
+    Calendar Year: 1981
+    Month: 10
+    Day: 28
+    Hour: 4
+    Minute: 5
+    Second: 6
+```
+
 ## Known Issues
 
 - No :penguin: support for now, as `getVaList()` is unavailable (see <https://github.com/apple/swift/blob/a30ae2bf55e21859418da6b8cd28273d5b71719c/stdlib/public/core/VarArgs.swift#L80-L83>).
