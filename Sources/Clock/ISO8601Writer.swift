@@ -9,6 +9,7 @@ import Foundation
 private let GMT_STRING_SIZE = Int(strlen("1971-02-03T09:16:06Z") + 1)
 
 extension NSDate {
+  /// Get an ISO8601 compatible string representation
   public func toISO8601GMTString() -> String? {
     var epoch = Int(self.timeIntervalSince1970)
     var time: UnsafeMutablePointer<tm>

@@ -8,6 +8,7 @@ typealias DateTuple = (year: Int, month: Int, day: Int,
     hour: Int, minute: Int, second: Int,
     timezone_hour: Int, timezone_minute: Int)
 
+/// Parser for ISO8601 dates
 public struct ISO8601 {
   static let TZ_MINUS_FORMAT = "%04d-%02d-%02dT%02d:%02d:%lf-%02d:%02d"
   static let TZ_MINUS_FORMAT_NO_COLON = "%04d-%02d-%02dT%02d:%02d:%lf-%02d%02d"
@@ -61,6 +62,7 @@ private extension NSDateComponents {
 }
 
 extension ISO8601 {
+  /// Parses an ISO8601 string, returning a coressponding NSDateComponents instance
   public static func parse(dateString: String) -> NSDateComponents {
     let components = NSDateComponents()
 
