@@ -2,6 +2,10 @@ import Spectre
 import Clock
 import Foundation
 
+#if os(Linux)
+import Glibc
+#endif
+
 func tm_struct(year year: Int = 0, month: Int = 0, day: Int = 0,
     hour: Int = 0, minute: Int = 0, second: Int = 0,
     timeZoneOffset: NSTimeInterval = 0) -> tm {
