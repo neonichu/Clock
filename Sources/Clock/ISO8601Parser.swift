@@ -69,8 +69,8 @@ extension tm {
   tm_min = Int32(dateTuple.minute)
   tm_hour = Int32(dateTuple.hour)
   tm_mday = Int32(dateTuple.day)
-  tm_mon = Int32(dateTuple.month)
-  tm_year = Int32(dateTuple.year)
+  tm_mon = Int32(dateTuple.month - 1)
+  tm_year = Int32(dateTuple.year - 1900)
   tm_wday = 0
   tm_yday = 0
   tm_isdst = 0

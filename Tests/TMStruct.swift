@@ -9,7 +9,7 @@ import Glibc
 func tm_struct(year year: Int = 0, month: Int = 0, day: Int = 0,
     hour: Int = 0, minute: Int = 0, second: Int = 0,
     timeZoneOffset: NSTimeInterval = 0) -> tm {
-    return tm(tm_sec: Int32(second), tm_min: Int32(minute), tm_hour: Int32(hour), tm_mday: Int32(day), tm_mon: Int32(month), tm_year: Int32(year), tm_wday: 0, tm_yday: 0, tm_isdst: 0, tm_gmtoff: Int(timeZoneOffset), tm_zone: nil)
+    return tm(tm_sec: Int32(second), tm_min: Int32(minute), tm_hour: Int32(hour), tm_mday: Int32(day), tm_mon: Int32(month - 1), tm_year: Int32(year - 1900), tm_wday: 0, tm_yday: 0, tm_isdst: 0, tm_gmtoff: Int(timeZoneOffset), tm_zone: nil)
     }
 
 extension tm : Equatable {}
