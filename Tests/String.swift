@@ -17,11 +17,13 @@ func describeDateToStringConversion() {
         try expect(actual.toISO8601GMTString()) == "1971-02-03T09:16:06Z"
     }
 
+#if !os(Linux)
     $0.it("can convert NSDate to an ISO8601 GMT string") {
       let input = components(year: 1971, month: 2, day: 3, hour: 9, minute: 16, second: 6)
       let actual = input.toDate()
 
       try expect(actual.toISO8601GMTString()) == "1971-02-03T09:16:06Z"
     }
+#endif
   }
 }
