@@ -63,8 +63,46 @@ private extension NSDateComponents {
   }
 }
 
+extension tm {
+  init(dateTuple: DateTuple) {
+  tm_sec = Int32(dateTuple.second)
+  tm_min = Int32(dateTuple.minute)
+  tm_hour = Int32(dateTuple.hour)
+  tm_mday = Int32(dateTuple.day)
+  tm_mon = Int32(dateTuple.month)
+  tm_year = Int32(dateTuple.year)
+  tm_wday = 0
+  tm_yday = 0
+  tm_isdst = 0
+  tm_gmtoff = dateTuple.timezone_hour * 60 * 60 + dateTuple.timezone_minute * 60
+  tm_zone = nil
+  }
+}
+
 extension ISO8601 {
-  /// Parses an ISO8601 string, returning a coressponding NSDateComponents instance
+  public static func parse(dateString: String) -> tm {
+  for format in [TZ_MINUS_FORMAT, TZ_MINUS_FORMAT_NO_COLON] {
+      if let t = parse(dateString, withFormat: format, failAt: 8) {
+        return tm(dateTuple: (t.year, t.month, t.day, t.hour, t.minute, t.second,
+            -t.timezone_hour, -t.timezone_minute))
+      }
+    }
+
+    for format in [TZ_PLUS_FORMAT, TZ_PLUS_FORMAT_NO_COLON] {
+      if let dateTuple = parse(dateString, withFormat: format, failAt: 8) {
+        return tm(dateTuple: dateTuple)
+      }
+    }
+
+    if let dateTuple = parse(dateString, withFormat: UTC_FORMAT) {
+      return tm(dateTuple: dateTuple)
+    }
+
+    let tuple: DateTuple = (0,0,0,0,0,0,0,0)
+    return tm(dateTuple: tuple)  
+  }
+
+/// Parses an ISO8601 string, returning a coressponding NSDateComponents instance
   public static func parse(dateString: String) -> NSDateComponents {
     let components = NSDateComponents()
 

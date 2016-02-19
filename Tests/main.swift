@@ -1,3 +1,4 @@
 describeDateToStringConversion()
 describeLocaltimeDates()
 describeUTCDates()
+describeTMStruct()
