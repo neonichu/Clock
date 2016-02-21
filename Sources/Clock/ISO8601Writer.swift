@@ -1,7 +1,7 @@
 #if os(Linux)
-import Glibc
+    import Glibc
 #else
-import Darwin
+    import Darwin
 #endif
 
 import Foundation
@@ -19,11 +19,11 @@ private func epochToISO8601GMTString(epoch : Int) -> String? {
 }
 
 extension NSDate {
-  /// Get an ISO8601 compatible string representation
-  public func toISO8601GMTString() -> String? {
-    let epoch = Int(self.timeIntervalSince1970)
-    return epochToISO8601GMTString(epoch)
-  }
+    /// Get an ISO8601 compatible string representation
+    public func toISO8601GMTString() -> String? {
+        let epoch = Int(self.timeIntervalSince1970)
+        return epochToISO8601GMTString(epoch)
+    }
 }
 
 extension tm {
