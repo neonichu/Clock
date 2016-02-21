@@ -28,7 +28,3 @@ You can convert `NSDate` instances to a string:
 print(date.toISO8601GMTString())
 1971-02-03T09:16:06Z
 ```
-
-## Known Issues
-
-- No :penguin: support for now, as `getVaList()` is unavailable (see <https://github.com/apple/swift/blob/a30ae2bf55e21859418da6b8cd28273d5b71719c/stdlib/public/core/VarArgs.swift#L80-L83>).
