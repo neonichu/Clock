@@ -1,9 +1,7 @@
-BUILD_DIR=./.build/debug
-
 .PHONY: clean lib test
 
 test: lib
-	$(BUILD_DIR)/spectre-build
+	swift test
 
 clean:
 	swift build --clean

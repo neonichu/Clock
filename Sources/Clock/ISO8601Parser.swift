@@ -31,7 +31,7 @@ public struct ISO8601 {
         withUnsafeMutablePointers(&y, &m, &d) { y, m, d in
             withUnsafeMutablePointers(&h, &mm, &s) { h, mm, s in
                 withUnsafeMutablePointers(&tz_h, &tz_m) { tz_h, tz_m in
-                    let args: [CVarArgType] = [y, m, d, h, mm, s, tz_h, tz_m]
+                    let args: [CVarArg] = [y, m, d, h, mm, s, tz_h, tz_m]
                     withVaList(args) {
                         result = vsscanf(dateString, format, $0)
                     }

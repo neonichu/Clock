@@ -13,9 +13,9 @@ private func epochToISO8601GMTString(epoch : Int) -> String? {
     var time: UnsafeMutablePointer<tm>
     time = gmtime(&epoch)
 
-    let buffer = UnsafeMutablePointer<Int8>.alloc(GMT_STRING_SIZE)
-    strftime(buffer, GMT_STRING_SIZE, "%FT%TZ", time);
-    return String.fromCString(buffer)
+    let buffer = UnsafeMutablePointer<Int8>(allocatingCapacity: GMT_STRING_SIZE)
+    strftime(buffer, GMT_STRING_SIZE, "%FT%TZ", time)
+    return String.init(validatingUTF8: buffer)
 }
 
 extension NSDate {
