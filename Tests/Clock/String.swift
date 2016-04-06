@@ -2,12 +2,14 @@ import XCTest
 @testable import Clock
 import Foundation
 
+#if !os(Linux)
 extension NSDateComponents {
     func toDate() -> NSDate {
         let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
         return calendar?.date(from: self) ?? NSDate()
     }
 }
+#endif
 
 class DateToStringConversionTests: XCTestCase {
     func testConvertTMStructToAnISO8601GMTString() {
@@ -27,11 +29,10 @@ class DateToStringConversionTests: XCTestCase {
 }
 
 #if os(Linux)
-extension DateToStringConversionTests: XCTestCaseProvider {
-    var allTests : [(String, () throws -> Void)] {
+extension DateToStringConversionTests {
+    static var allTests : [(String, DateToStringConversionTests -> () throws -> Void)] {
         return [
-            ("testConvertTMStructToAnISO8601GMTString", testConvertTMStructToAnISO8601GMTString),
-            ("testCanConvertNSDateToAnISO8601GMString", testCanConvertNSDateToAnISO8601GMString)
+            ("testConvertTMStructToAnISO8601GMTString", testConvertTMStructToAnISO8601GMTString)
         ]
     }
 }

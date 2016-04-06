@@ -41,8 +41,8 @@ class UTCDatesTests: XCTestCase {
 }
 
 #if os(Linux)
-extension UTCDatesTests: XCTestCaseProvider {
-    var allTests : [(String, () throws -> Void)] {
+extension UTCDatesTests {
+    static var allTests : [(String, UTCDatesTests -> () throws -> Void)] {
         return [
             ("testCanParseDates", testCanParseDates),
             ("testCanParseEpoch", testCanParseEpoch),

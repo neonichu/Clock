@@ -29,8 +29,8 @@ class LocaltimeDatesTests: XCTestCase {
 }
 
 #if os(Linux)
-extension LocaltimeDatesTests: XCTestCaseProvider {
-    var allTests : [(String, () throws -> Void)] {
+extension LocaltimeDatesTests {
+    static var allTests : [(String, LocaltimeDatesTests -> () throws -> Void)] {
         return [
             ("testParsingOfLocaltimeDates", testParsingOfLocaltimeDates),
             ("testCanParseDatesWithNegativeTimezoneOffsets", testCanParseDatesWithNegativeTimezoneOffsets),

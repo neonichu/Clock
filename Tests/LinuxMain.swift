@@ -2,8 +2,8 @@ import XCTest
 @testable import ClockTestSuite
 
 XCTMain([
-	TMStructTests(),
-	DateToStringConversionTests(),
-	//LocaltimeDatesTests(),
-	//UTCDatesTests(),
+	testCase(TMStructTests.allTests),
+	testCase(DateToStringConversionTests.allTests),
+	//testCase(LocaltimeDatesTests.allTests),
+	//testCase(UTCDatesTests.allTests),
 ])

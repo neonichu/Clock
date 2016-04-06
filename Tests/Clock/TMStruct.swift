@@ -36,8 +36,8 @@ class TMStructTests: XCTestCase {
 }
 
 #if os(Linux)
-extension TMStructTests: XCTestCaseProvider {
-    var allTests : [(String, () throws -> Void)] {
+extension TMStructTests {
+    static var allTests : [(String, TMStructTests -> () throws -> Void)] {
         return [
             ("testCanParseDates", testCanParseDates),
             ("testCanParseDatesWithoutSeconds", testCanParseDatesWithoutSeconds),
