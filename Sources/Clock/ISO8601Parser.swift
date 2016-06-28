@@ -16,7 +16,7 @@ public struct ISO8601 {
     static let TZ_PLUS_FORMAT_NO_COLON = "%04d-%02d-%02dT%02d:%02d:%lf+%02d%02d"
     static let UTC_FORMAT = "%04d-%02d-%02dT%02d:%02d:%lfZ"
 
-    static func parse(dateString: String, withFormat format: String, failAt: Int32 = 5) -> DateTuple? {
+    static func parse(_ dateString: String, withFormat format: String, failAt: Int32 = 5) -> DateTuple? {
         var y: Int32 = 0
         var m: Int32 = 0
         var d: Int32 = 0
@@ -50,14 +50,14 @@ public struct ISO8601 {
 import Foundation
 
 private extension NSDateComponents {
-    func fill(dateTuple: DateTuple) -> NSDateComponents {
+    func fill(_ dateTuple: DateTuple) -> NSDateComponents {
         self.year = dateTuple.year
         self.month = dateTuple.month
         self.day = dateTuple.day
         self.hour = dateTuple.hour
         self.minute = dateTuple.minute
         self.second = dateTuple.second
-        self.timeZone = NSTimeZone(forSecondsFromGMT: dateTuple.timezone_hour * 60 * 60
+        self.timeZone = TimeZone(forSecondsFromGMT: dateTuple.timezone_hour * 60 * 60
             + dateTuple.timezone_minute * 60)
         return self
     }
@@ -80,7 +80,7 @@ extension tm {
 }
 
 extension ISO8601 {
-    private static func parse(dateString: String) -> DateTuple {
+    private static func parse(_ dateString: String) -> DateTuple {
         for format in [TZ_MINUS_FORMAT, TZ_MINUS_FORMAT_NO_COLON] {
             if let t = parse(dateString, withFormat: format, failAt: 8) {
                 return (t.year, t.month, t.day, t.hour, t.minute, t.second, -t.timezone_hour, -t.timezone_minute)
@@ -100,13 +100,13 @@ extension ISO8601 {
         return (0,0,0,0,0,0,0,0)
     }
     
-    public static func parse(dateString: String) -> tm {
+    public static func parse(_ dateString: String) -> tm {
         let tuple: DateTuple = parse(dateString)
         return tm(dateTuple: tuple) 
     }
     
     /// Parses an ISO8601 string, returning a coressponding NSDateComponents instance
-    public static func parse(dateString: String) -> NSDateComponents {
+    public static func parse(_ dateString: String) -> NSDateComponents {
         let components = NSDateComponents()
         let tuple: DateTuple = parse(dateString)
         return components.fill(tuple)

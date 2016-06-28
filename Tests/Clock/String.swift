@@ -5,8 +5,8 @@ import Foundation
 #if !os(Linux)
 extension NSDateComponents {
     func toDate() -> NSDate {
-        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-        return calendar?.date(from: self) ?? NSDate()
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar?.date(from: self as DateComponents) ?? NSDate()
     }
 }
 #endif

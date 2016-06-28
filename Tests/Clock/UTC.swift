@@ -2,9 +2,9 @@ import XCTest
 @testable import Clock
 import Foundation
 
-func components(year year: Int = 0, month: Int = 0, day: Int = 0,
-                     hour: Int = 0, minute: Int = 0, second: Int = 0,
-                     timeZoneOffset: NSTimeInterval = 0) -> NSDateComponents {
+func components(year: Int = 0, month: Int = 0, day: Int = 0,
+                hour: Int = 0, minute: Int = 0, second: Int = 0,
+                timeZoneOffset: TimeInterval = 0) -> NSDateComponents {
     let components = NSDateComponents()
     components.year = year
     components.month = month
@@ -12,7 +12,7 @@ func components(year year: Int = 0, month: Int = 0, day: Int = 0,
     components.hour = hour
     components.minute = minute
     components.second = second
-    components.timeZone = NSTimeZone(forSecondsFromGMT: Int(timeZoneOffset))
+    components.timeZone = TimeZone(forSecondsFromGMT: Int(timeZoneOffset))
     return components
 }
 

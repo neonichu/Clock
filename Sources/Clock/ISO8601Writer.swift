@@ -8,7 +8,7 @@ import Foundation
 
 private let GMT_STRING_SIZE = Int(strlen("1971-02-03T09:16:06Z") + 1)
 
-private func epochToISO8601GMTString(epoch : Int) -> String? {
+private func epochToISO8601GMTString(_ epoch : Int) -> String? {
     var epoch = epoch
     var time: UnsafeMutablePointer<tm>
     time = gmtime(&epoch)
